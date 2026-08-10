@@ -1,0 +1,2248 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzas El Che Boludo - Las mejores pizzas artesanales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        img, iframe, video, svg {
+            max-width: 100%;
+        }
+
+        :root {
+            --primary: #5c1665;
+            --primary-light: #8a3d9e;
+            --primary-dark: #33093d;
+            --secondary: #8dc63f;
+            --accent: #3d0f47;
+            --light: #f4fbea;
+            --dark: #2b0a33;
+            --text: #333;
+            --green: #52b788;
+            --header-height: 76px;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(120deg, var(--primary-light) 0%, var(--primary) 55%, var(--primary-dark) 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(92, 22, 101, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: slideInLeft 0.8s ease;
+        }
+
+        .logo img {
+            width: 45px;
+            height: 45px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cart-btn {
+            position: relative;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .cart-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: scale(1.05);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #e01e37;
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            border: 2px solid var(--primary);
+            transition: transform 0.2s ease;
+        }
+
+        .cart-badge.bump {
+            transform: scale(1.3);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: white;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, rgba(92, 22, 101, 0.1) 0%, rgba(141, 198, 63, 0.1) 100%);
+            padding: 120px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(92, 22, 101, 0.6) 0%, rgba(141, 198, 63, 0.6) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 900;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: white;
+            color: var(--secondary);
+            border: none;
+            padding: 16px 45px;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(141, 198, 63, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            z-index: -1;
+            transition: left 0.3s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(141, 198, 63, 0.4);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: var(--secondary);
+        }
+
+        /* PRODUCTOS */
+        .products {
+            padding: 100px 20px;
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            .products {
+                padding: 50px 15px;
+            }
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-weight: 900;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #999;
+            font-size: 16px;
+            margin-bottom: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .section-subtitle {
+                font-size: 14px;
+                margin-bottom: 30px;
+            }
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin-bottom: 30px;
+            }
+        }
+
+        /* ================================================
+           SCROLL REVEAL UNIVERSAL - Se aplica a TODO
+           ================================================ */
+        
+        /* Elemento base: invisible y abajo */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Cuando está en viewport: visible y en su lugar */
+        .scroll-reveal.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================================================
+           TARJETAS DE PRODUCTOS
+           ================================================ */
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 
+                        0 10px 20px rgba(0, 0, 0, 0.1),
+                        0 15px 35px rgba(141, 198, 63, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(80px);
+        }
+
+        .product-card.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.12),
+                        0 20px 40px rgba(0, 0, 0, 0.15),
+                        0 25px 50px rgba(141, 198, 63, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1;
+            overflow: hidden;
+            position: relative;
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 15px;
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: scale(1);
+        }
+
+        .product-card.reveal .product-image img {
+            transform: scale(1);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.08);
+        }
+
+        /* ================================================
+           CARRUSEL - SCROLL REVEAL
+           ================================================ */
+        .menu-item-list {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08),
+                        0 8px 16px rgba(0, 0, 0, 0.1),
+                        0 12px 24px rgba(141, 198, 63, 0.08);
+            position: relative;
+        }
+
+        .quick-add-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: none;
+            background: var(--secondary);
+            color: white;
+            font-size: 15px;
+            font-weight: 900;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            box-shadow: 0 3px 8px rgba(141, 198, 63, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .quick-add-btn:hover {
+            transform: scale(1.15);
+            background: var(--primary);
+        }
+
+        .quick-add-btn.added {
+            background: var(--green);
+        }
+
+        .menu-item-list.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .menu-item-list:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12),
+                        0 16px 32px rgba(0, 0, 0, 0.12),
+                        0 20px 40px rgba(141, 198, 63, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .menu-item-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 14px;
+        }
+
+        .menu-item-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .menu-item-image {
+            width: 140px;
+            height: 140px;
+            flex-shrink: 0;
+            background: var(--light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding-right: 5px;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-item-content {
+                gap: 12px;
+                padding: 10px 12px;
+            }
+
+            .menu-item-image {
+                width: 130px;
+                height: 130px;
+                padding-right: 4px;
+            }
+        }
+
+        .menu-item-list.hidden {
+            display: none;
+        }
+
+        .menu-item {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08),
+                        0 8px 16px rgba(0, 0, 0, 0.1),
+                        0 12px 24px rgba(141, 198, 63, 0.08);
+        }
+
+        .menu-item.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .menu-item:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12),
+                        0 16px 32px rgba(0, 0, 0, 0.12),
+                        0 20px 40px rgba(141, 198, 63, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .menu-item {
+                padding: 16px;
+                border-radius: 12px;
+            }
+
+            .menu-item img {
+                max-height: 140px;
+            }
+        }
+
+        .menu-item.hidden {
+            display: none;
+        }
+
+        /* ================================================
+           ITEMS DE ESTADÍSTICAS - SCROLL REVEAL
+           ================================================ */
+        .stat-item {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1),
+                        0 8px 16px rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-item.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-item:hover {
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.15),
+                        0 16px 32px rgba(255, 255, 255, 0.1);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(92, 22, 101, 0.7) 0%, rgba(141, 198, 63, 0.7) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .overlay-icon {
+            font-size: 50px;
+            color: white;
+            animation: bounce 0.6s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .product-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            color: var(--secondary);
+            font-size: 22px;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .product-info p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* CARRUSEL */
+        .carousel {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--light) 0%, #fff5fb 100%);
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .carousel-wrapper {
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1),
+                        0 15px 35px rgba(0, 0, 0, 0.12),
+                        0 25px 50px rgba(141, 198, 63, 0.12);
+            position: relative;
+            /* Scroll-reveal styles */
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .carousel-wrapper.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            height: 500px;
+            position: relative;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            animation: slideUp 0.6s ease;
+        }
+
+        .carousel-caption h3 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px 0 0;
+        }
+
+        .carousel-btn {
+            position: static;
+            transform: none;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 12px rgba(141, 198, 63, 0.15);
+            color: var(--secondary);
+            border: none;
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-dots {
+            text-align: center;
+            padding: 0;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            margin: 0 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .dot.active {
+            background: var(--secondary);
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        /* STATS */
+        .stats {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+
+
+        /* MENU INTERACTIVO */
+        .menu {
+            padding: 80px 5px;
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                padding: 50px 5px;
+            }
+        }
+
+        .menu-filters {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+
+            /* Sticky justo debajo del header, diseño limpio y translúcido */
+            position: sticky;
+            top: var(--header-height);
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 999;
+            padding: 14px 10px;
+            transition: background 0.3s ease;
+            will-change: transform;
+        }
+
+        .menu-filters.is-stuck {
+            background: rgba(255, 255, 255, 0.65);
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .menu-filters {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+                margin-bottom: 30px;
+                padding: 10px 8px;
+                /* El blur detrás de un elemento sticky es muy costoso en móvil
+                   (se recalcula en cada frame de scroll); lo quitamos aquí y
+                   compensamos con un fondo un poco más sólido */
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: rgba(255, 255, 255, 0.85);
+            }
+
+            .menu-filters.is-stuck {
+                background: rgba(255, 255, 255, 0.95);
+            }
+
+            .filter-btn {
+                flex: 0 0 calc((100% - 4 * 8px) / 5);
+                padding: 8px 4px;
+                font-size: 9.5px;
+                border-radius: 30px;
+                border: 1.5px solid var(--secondary);
+                line-height: 1.2;
+                white-space: nowrap;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-filters {
+                gap: 6px;
+                padding: 8px 6px;
+            }
+
+            .filter-btn {
+                flex-basis: calc((100% - 4 * 6px) / 5);
+                padding: 7px 2px;
+                font-size: 8.5px;
+            }
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 35px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+
+
+        .menu-item-price {
+            font-size: 20px;
+            color: var(--primary);
+            font-weight: 900;
+            margin-top: 4px;
+        }
+
+        .menu-item-name {
+            font-size: 16px;
+            color: var(--secondary);
+            margin: 0;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 768px) {
+            .menu-item-price {
+                font-size: 16px;
+                margin-top: 3px;
+            }
+
+            .menu-item-name {
+                font-size: 13px;
+                margin: 0;
+            }
+
+            .menu-item p {
+                font-size: 11px !important;
+                margin-top: 4px !important;
+                line-height: 1.3;
+            }
+        }
+
+        /* ================================================
+           CONTACTO (rehecho desde cero)
+           ================================================ */
+        .contact {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--dark) 0%, #1a0f22 100%);
+            color: white;
+        }
+
+        .map-box {
+            max-width: 480px;
+            margin: 0 auto 40px;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .map-box iframe {
+            display: block;
+            width: 100%;
+            height: 220px;
+            border: 0;
+        }
+
+        @media (min-width: 600px) {
+            .map-box iframe {
+                height: 300px;
+            }
+        }
+
+        .contact-info-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 22px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(92, 22, 101, 0.15);
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin: 0 auto 12px;
+        }
+
+        .info-card h4 {
+            color: var(--secondary);
+            font-size: 17px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .info-card p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 2px solid rgba(92, 22, 101, 0.2);
+        }
+
+        .footer-content {
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 20px;
+                gap: 8px;
+                letter-spacing: 1px;
+            }
+
+            .logo img {
+                width: 34px;
+                height: 34px;
+            }
+
+            .cart-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 15px;
+            }
+
+            .header-actions {
+                gap: 8px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            nav {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                padding: 20px;
+                gap: 15px;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .carousel-item {
+                height: 350px;
+            }
+        }
+
+        /* ================================================
+           MODAL DE DETALLE DE PRODUCTO
+           ================================================ */
+        .product-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(45, 27, 61, 0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .product-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .product-modal {
+            background: white;
+            border-radius: 24px;
+            max-width: 380px;
+            width: 100%;
+            max-height: 88vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            transform: translateY(30px) scale(0.96);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .product-modal-overlay.active .product-modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .product-modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-modal-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--light);
+            border-radius: 24px 24px 0 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
+        }
+
+        .product-modal-info {
+            padding: 24px 26px 28px;
+            text-align: center;
+        }
+
+        .product-modal-info h3 {
+            color: var(--secondary);
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .product-modal-price {
+            color: var(--primary);
+            font-size: 30px;
+            font-weight: 900;
+            margin-bottom: 14px;
+        }
+
+        .product-modal-info p {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(141, 198, 63, 0.3);
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(141, 198, 63, 0.4);
+        }
+
+        .add-to-cart-btn.added {
+            background: linear-gradient(135deg, var(--green), #40916c);
+        }
+
+        /* ================================================
+           PANEL DEL CARRITO (bottom sheet, mobile-first)
+           ================================================ */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(45, 27, 61, 0.55);
+            z-index: 2100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-panel {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            max-width: 480px;
+            margin: 0 auto;
+            max-height: 82vh;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(0.25, 0.9, 0.35, 1);
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-overlay.active .cart-panel {
+            transform: translateY(0);
+        }
+
+        .cart-panel-handle {
+            width: 44px;
+            height: 5px;
+            background: #eee;
+            border-radius: 4px;
+            margin: 12px auto 0;
+        }
+
+        .cart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 22px 14px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .cart-header h3 {
+            color: var(--secondary);
+            font-size: 19px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: var(--light);
+            color: var(--dark);
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-items {
+            overflow-y: auto;
+            padding: 10px 22px;
+            flex: 1;
+        }
+
+        .cart-empty {
+            text-align: center;
+            color: #aaa;
+            padding: 40px 10px;
+            font-size: 14px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .cart-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cart-item-name {
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-meta {
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 13px;
+        }
+
+        .cart-item-qty {
+            color: #999;
+            font-weight: 600;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .cart-item-remove,
+        .cart-item-add {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid var(--secondary);
+            background: white;
+            color: var(--secondary);
+            font-size: 16px;
+            font-weight: 900;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .cart-item-qty-count {
+            min-width: 18px;
+            text-align: center;
+            font-weight: 800;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        .cart-item-remove:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .cart-item-add {
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .cart-item-add:hover {
+            background: var(--green);
+            color: white;
+        }
+
+        .cart-footer {
+            padding: 16px 22px 22px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .cart-total {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 14px;
+        }
+
+        .cart-checkout-btn {
+            width: 100%;
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+        }
+
+        .cart-checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(37, 211, 102, 0.45);
+        }
+
+        .cart-checkout-btn:disabled {
+            background: #ccc;
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="./logo.png" alt="Pizzas El Che Boludo">
+                    El Che Boludo
+                </div>
+                <nav id="nav">
+                    <a href="#inicio">Inicio</a>
+                    <a href="#productos">Productos</a>
+                    <a href="#menu">Menú</a>
+                    <a href="#galeria">Galería</a>
+                    <a href="#contacto">Contacto</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="cart-btn" id="cartBtn" aria-label="Ver carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge" id="cartBadge">0</span>
+                    </button>
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+        <img
+            class="hero-gif"
+            id="heroGif"
+            src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&h=800&fit=crop"
+            alt="Pizzas El Che Boludo"
+            loading="eager"
+        >
+        <div class="hero-content">
+            <h1>Bienvenido a El Che Boludo</h1>
+            <p>Las pizzas más boludamente deliciosas de la colonia</p>
+            <div class="hero-buttons">
+                <button class="cta-button" id="verMenuBtn">Ver Menú</button>
+                <button class="cta-button cta-secondary">Pedir por WhatsApp</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTOS DESTACADOS -->
+    <section class="products" id="productos">
+        <div class="container">
+            <h2 class="section-title">Lo Más Pedido</h2>
+            <p class="section-subtitle">Masa artesanal, ingredientes frescos y mucho queso</p>
+            <div class="products-grid">
+                <div class="product-card scroll-reveal">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop" alt="Especialidades" id="img-fresas">
+                        <div class="product-overlay">
+                            <i class="fas fa-star overlay-icon"></i>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Especialidades</h3>
+                        <p>15 sabores distintos, desde la Pomposa hasta la Vaqueriana</p>
+                    </div>
+                </div>
+
+                <div class="product-card scroll-reveal">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=400&h=300&fit=crop" alt="Promociones" id="img-crepas">
+                        <div class="product-overlay">
+                            <i class="fas fa-fire overlay-icon"></i>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Promociones</h3>
+                        <p>Combos de 2 y 3 pizzas con refresco incluido</p>
+                    </div>
+                </div>
+
+                <div class="product-card scroll-reveal">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1552539618-7eec9b4d1796?w=400&h=300&fit=crop" alt="Pastor a la BBQ" id="img-smoothies">
+                        <div class="product-overlay">
+                            <i class="fas fa-pepper-hot overlay-icon"></i>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Pastor a la BBQ</h3>
+                        <p>Nuestra especialidad con orilla de queso manchego</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARRUSEL -->
+    <section class="carousel" id="galeria">
+        <div class="container">
+            <h2 class="section-title">Galería de Inspiración</h2>
+            <div class="carousel-container">
+                <div class="carousel-wrapper scroll-reveal">
+                    <div class="carousel-inner" id="carouselInner">
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700&h=700&fit=crop" alt="Pizza Especial">
+                            <div class="carousel-caption">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=700&h=700&fit=crop" alt="Pizza Pomposa">
+                            <div class="carousel-caption">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1548365328-9f547fb0953b?w=700&h=700&fit=crop" alt="Pizza Mexicana">
+                            <div class="carousel-caption">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=700&h=700&fit=crop" alt="Pizza Magnum">
+                            <div class="carousel-caption">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=700&h=700&fit=crop" alt="Pastor a la BBQ">
+                            <div class="carousel-caption">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700&h=700&fit=crop" alt="Pizza Hawaiana">
+                            <div class="carousel-caption">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev" id="prevBtn">❮</button>
+                    <div class="carousel-dots" id="dotsContainer"></div>
+                    <button class="carousel-btn next" id="nextBtn">❯</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item scroll-reveal">
+                    <h3>5000+</h3>
+                    <p>Pizzas Entregadas</p>
+                </div>
+                <div class="stat-item scroll-reveal">
+                    <h3>15+</h3>
+                    <p>Sabores Diferentes</p>
+                </div>
+                <div class="stat-item scroll-reveal">
+                    <h3>100%</h3>
+                    <p>Ingredientes Frescos</p>
+                </div>
+                <div class="stat-item scroll-reveal">
+                    <h3>10</h3>
+                    <p>Min. Cerca del Puente</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENÚ INTERACTIVO -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Nuestro Menú</h2>
+            <div id="menuStickySentinel"></div>
+            <div class="menu-filters" id="menuFilters">
+                <button class="filter-btn active" data-filter="todos">Todos</button>
+                <button class="filter-btn" data-filter="promociones">Promociones</button>
+                <button class="filter-btn" data-filter="especialidades">Especialidades</button>
+                <button class="filter-btn" data-filter="personaliza">Personaliza</button>
+                <button class="filter-btn" data-filter="combos">Combos</button>
+                <button class="filter-btn" data-filter="bebidas">Bebidas</button>
+            </div>
+            <div class="menu-grid" id="menuGrid">
+                <!-- Items generados por JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <h2 class="section-title">Visítanos en</h2>
+
+            <div class="map-box scroll-reveal">
+                <iframe src="https://www.google.com/maps?q=Av.+Nacional+11+San+Francisco+Cuautliquixca&output=embed" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+
+            <div class="contact-info-grid">
+                <div class="info-card scroll-reveal">
+                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h4>Dirección</h4>
+                    <p>Av. Nacional No. 11, Local 1, San Francisco Cuautliquixca<br>A un costado de Farmacias del Ahorro, frente al puente peatonal</p>
+                </div>
+                <div class="info-card scroll-reveal">
+                    <div class="info-icon"><i class="fas fa-clock"></i></div>
+                    <h4>Horario</h4>
+                    <p>Todos los días de 12:00 PM a 10:00 PM</p>
+                </div>
+                <div class="info-card scroll-reveal">
+                    <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
+                    <h4>Pedidos</h4>
+                    <p>55 6347 2545<br>55 5934 1087<br>55 5934 1430</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Pizzas El Che Boludo. Todos los derechos reservados.</p>
+                <p>Hecho con 🧡 para los amantes de la pizza</p>
+                <div class="social-links">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Messenger"><i class="fab fa-facebook-messenger"></i></a>
+                    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DE DETALLE DE PRODUCTO -->
+    <div class="product-modal-overlay" id="productModalOverlay">
+        <div class="product-modal">
+            <button class="product-modal-close" id="productModalClose" aria-label="Cerrar">&times;</button>
+            <div class="product-modal-image">
+                <img id="modalImage" src="" alt="">
+            </div>
+            <div class="product-modal-info">
+                <h3 id="modalName"></h3>
+                <div class="product-modal-price" id="modalPrice"></div>
+                <p id="modalDesc"></p>
+                <button class="add-to-cart-btn" id="modalAddBtn">
+                    Agregar al <i class="fas fa-shopping-cart"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL DEL CARRITO -->
+    <div class="cart-overlay" id="cartOverlay">
+        <div class="cart-panel" id="cartPanel">
+            <div class="cart-panel-handle"></div>
+            <div class="cart-header">
+                <h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3>
+                <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- generado por JS -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total" id="cartTotal">Total: MX$0.00</div>
+                <button class="cart-checkout-btn" id="checkoutBtn">
+                    <i class="fab fa-whatsapp"></i> Finalizar por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // AJUSTAR ALTURA REAL DEL HEADER (para el sticky del menú)
+        // ============================================
+        function setHeaderHeightVar() {
+            const header = document.querySelector('header');
+            const height = header.offsetHeight;
+            document.documentElement.style.setProperty('--header-height', `${height}px`);
+        }
+        setHeaderHeightVar();
+        window.addEventListener('resize', setHeaderHeightVar);
+        window.addEventListener('load', setHeaderHeightVar);
+
+        // HAMBURGER MENU
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            setHeaderHeightVar();
+        });
+
+        nav.addEventListener('click', () => {
+            nav.classList.remove('active');
+            setHeaderHeightVar();
+        });
+
+        // CAROUSEL
+        let currentSlide = 0;
+        const carousel = document.getElementById('carouselInner');
+        const slides = carousel.querySelectorAll('.carousel-item');
+        const dotsContainer = document.getElementById('dotsContainer');
+
+        slides.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.className = `dot ${index === 0 ? 'active' : ''}`;
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            updateCarousel();
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateCarousel();
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', nextSlide);
+        document.getElementById('prevBtn').addEventListener('click', prevSlide);
+
+        setInterval(nextSlide, 5000);
+
+        // ============================================
+        // SWIPE TÁCTIL EN EL CARRUSEL (para móvil)
+        // ============================================
+        const carouselWrapper = document.querySelector('.carousel-wrapper');
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const SWIPE_THRESHOLD = 40; // px mínimos para contar como swipe
+
+        carouselWrapper.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        carouselWrapper.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > SWIPE_THRESHOLD) {
+                diff > 0 ? nextSlide() : prevSlide();
+            }
+        }, { passive: true });
+
+        // ============================================
+        // MAPEO DE IMÁGENES DE PRODUCTOS
+        // ============================================
+        // Imagenes de prueba: por ahora se repiten 5 fotos de stock en todos los
+        // productos, solo para ver como luce la web. Cuando tengas las 5 fotos
+        // reales (1.png, 2.png, 3.png, 4.png, 5.png), súbelas junto al index.html
+        // y cambia IMAGE_BASE_URL a './' y cada valor del mapa de abajo por
+        // '1.png', '2.png', etc.
+        const IMAGE_BASE_URL = '';
+        const productImageMap = {
+            'Promo 1 - Pepperoni y Hawaiana': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=500&fit=crop',
+            'Promo 2 - Pepperoni y Hawaiana': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=500&fit=crop',
+            'Promo 3 - Grandes con Orilla': 'https://images.unsplash.com/photo-1548365328-9f547fb0953b?w=500&h=500&fit=crop',
+            'Promo 4 - Familiares con Orilla': 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=500&h=500&fit=crop',
+            'Martes y Miercoles - 2 Grandes': 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=500&h=500&fit=crop',
+            'Martes y Miercoles - 2 Familiares': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=500&fit=crop',
+
+            'Especial': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=500&fit=crop',
+            'Pomposa': 'https://images.unsplash.com/photo-1548365328-9f547fb0953b?w=500&h=500&fit=crop',
+            'Mexicana': 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=500&h=500&fit=crop',
+            'Magnum': 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=500&h=500&fit=crop',
+            'Ranchera': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=500&fit=crop',
+            'Res Fria': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=500&fit=crop',
+            'Alambre': 'https://images.unsplash.com/photo-1548365328-9f547fb0953b?w=500&h=500&fit=crop',
+            'Nortenuzca': 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=500&h=500&fit=crop',
+            'Vegetariana': 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=500&h=500&fit=crop',
+            'La Pampa': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=500&fit=crop',
+            'Cheroni': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=500&fit=crop',
+            'Vaqueriana': 'https://images.unsplash.com/photo-1548365328-9f547fb0953b?w=500&h=500&fit=crop',
+            'Pepperoni': 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=500&h=500&fit=crop',
+            'Hawaiana': 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=500&h=500&fit=crop',
+            'La Pastore': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=500&fit=crop',
+            'Pastor a la BBQ': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=500&fit=crop',
+
+            'Orilla de Queso Chica': 'https://images.unsplash.com/photo-1548365328-9f547fb0953b?w=500&h=500&fit=crop',
+            'Orilla de Queso Mediana': 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=500&h=500&fit=crop',
+            'Orilla de Queso Grande': 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=500&h=500&fit=crop',
+            'Orilla de Queso Familiar': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=500&fit=crop',
+            'Pizza Mitad y Mitad': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=500&fit=crop',
+
+            'Combo 2 Medianas': 'https://images.unsplash.com/photo-1548365328-9f547fb0953b?w=500&h=500&fit=crop',
+            'Combo 3 Medianas': 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=500&h=500&fit=crop',
+
+            'Refresco 1.5 L': 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=500&h=500&fit=crop',
+            'Refresco de Vidrio': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=500&fit=crop'
+        };
+
+        function getProductImage(productName) {
+            const imageFile = productImageMap[productName];
+            if (imageFile) {
+                return IMAGE_BASE_URL + imageFile;
+            }
+            return 'https://via.placeholder.com/300x300?text=' + encodeURIComponent(productName);
+        }
+
+        const menuItems = [
+            // ---------- PROMOCIONES ----------
+            { name: 'Promo 1 - Pepperoni y Hawaiana', price: '$290.00', category: 'promociones', desc: '2 pizzas grandes (Pepperoni y Hawaiana) + 1 refresco de 1.5 L' },
+            { name: 'Promo 2 - Pepperoni y Hawaiana', price: '$340.00', category: 'promociones', desc: '2 pizzas familiares (Pepperoni y Hawaiana) + 1 refresco de 1.5 L' },
+            { name: 'Promo 3 - Grandes con Orilla', price: '$350.00', category: 'promociones', desc: '2 pizzas grandes, 1 con orilla de queso + 1 refresco de 1.5 L' },
+            { name: 'Promo 4 - Familiares con Orilla', price: '$400.00', category: 'promociones', desc: '2 pizzas familiares, 1 con orilla de queso + 1 refresco de 1.5 L' },
+            { name: 'Martes y Miercoles - 2 Grandes', price: '$285.00', category: 'promociones', desc: 'Solo martes y miercoles: 2 pizzas grandes del sabor que elijas' },
+            { name: 'Martes y Miercoles - 2 Familiares', price: '$320.00', category: 'promociones', desc: 'Solo martes y miercoles: 2 pizzas familiares del sabor que elijas' },
+
+            // ---------- ESPECIALIDADES ----------
+            { name: 'Especial', price: '$170.00', category: 'especialidades', desc: 'Frijoles, chorizo, jalapeno, carne y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'Pomposa', price: '$170.00', category: 'especialidades', desc: 'Salami, champinones, tocino, jalapeno y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'Mexicana', price: '$170.00', category: 'especialidades', desc: 'Pierna, pollo, jalapeno, aguacate y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'Magnum', price: '$170.00', category: 'especialidades', desc: 'Pepperoni, salchicha, salami, chorizo, pimienta y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'Ranchera', price: '$170.00', category: 'especialidades', desc: 'Frijol, cebolla, jalapenos, chorizo, aguacate y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'Res Fria', price: '$170.00', category: 'especialidades', desc: 'Pierna, salami, pepperoni, salchicha, chorizo, tocino y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'Alambre', price: '$170.00', category: 'especialidades', desc: 'Pollo, chorizo, pimiento, cebolla y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'Nortenuzca', price: '$170.00', category: 'especialidades', desc: 'Atun, champinones, cebolla y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'Vegetariana', price: '$170.00', category: 'especialidades', desc: 'Elote, champinones, cebolla, pimiento y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'La Pampa', price: '$170.00', category: 'especialidades', desc: 'Jamon, pina, jalapeno, tocino y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'Cheroni', price: '$170.00', category: 'especialidades', desc: 'Champinon, pepperoni y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'Vaqueriana', price: '$170.00', category: 'especialidades', desc: 'Carne molida, cebolla, jitomate, jalapeno, aguacate y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'Pepperoni', price: '$170.00', category: 'especialidades', desc: 'Pepperoni y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'Hawaiana', price: '$170.00', category: 'especialidades', desc: 'Jamon, pina y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'La Pastore', price: '$170.00', category: 'especialidades', desc: 'Carne al pastor, pina, cebolla, chorizo y queso. Precio de pizza grande; tambien disponible en chica $90, mediana $150 y familiar $190' },
+            { name: 'Pastor a la BBQ', price: '$220.00', category: 'especialidades', desc: 'Cebolla, pimienta, pina, carne al pastor, tocino, salsa BBQ, queso manchego y orilla de queso. Solo disponible en grande $220 y familiar $240' },
+
+            // ---------- PERSONALIZA TU PIZZA ----------
+            { name: 'Orilla de Queso Chica', price: '$18.00', category: 'personaliza', desc: 'Extra de orilla de queso para pizza chica' },
+            { name: 'Orilla de Queso Mediana', price: '$40.00', category: 'personaliza', desc: 'Extra de orilla de queso para pizza mediana' },
+            { name: 'Orilla de Queso Grande', price: '$45.00', category: 'personaliza', desc: 'Extra de orilla de queso para pizza grande' },
+            { name: 'Orilla de Queso Familiar', price: '$50.00', category: 'personaliza', desc: 'Extra de orilla de queso para pizza familiar' },
+            { name: 'Pizza Mitad y Mitad', price: '$12.00', category: 'personaliza', desc: 'Combina dos sabores en la misma pizza (costo extra sobre el precio base)' },
+
+            // ---------- COMBOS DE MEDIANAS ----------
+            { name: 'Combo 2 Medianas', price: '$260.00', category: 'combos', desc: '2 pizzas medianas + 1 refresco de 1.5 L' },
+            { name: 'Combo 3 Medianas', price: '$340.00', category: 'combos', desc: '3 pizzas medianas + 1 refresco de 1.5 L' },
+
+            // ---------- BEBIDAS ----------
+            { name: 'Refresco 1.5 L', price: '$40.00', category: 'bebidas', desc: 'Refresco familiar de 1.5 litros' },
+            { name: 'Refresco de Vidrio', price: '$30.00', category: 'bebidas', desc: 'Refresco individual de vidrio' }
+        ];
+
+        const menuGrid = document.getElementById('menuGrid');
+
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const scrollObserver = new IntersectionObserver(function(entries) {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                } else {
+                    entry.target.classList.remove('reveal');
+                }
+            });
+        }, observerOptions);
+
+        function renderMenu(filter = 'todos') {
+            menuGrid.innerHTML = '';
+            menuItems.forEach((item, index) => {
+                if (filter === 'todos' || item.category === filter) {
+                    const div = document.createElement('div');
+                    div.className = 'menu-item-list scroll-reveal';
+                    div.style.cursor = 'pointer';
+                    const imageUrl = getProductImage(item.name);
+                    div.innerHTML = `
+                        <button class="quick-add-btn" aria-label="Agregar al carrito">+</button>
+                        <div class="menu-item-content">
+                            <div class="menu-item-text">
+                                <div class="menu-item-name">${item.name}</div>
+                                <div class="menu-item-price">${item.price}</div>
+                                ${item.desc ? `<p style="color: #999; font-size: 13px; line-height: 1.5; margin-top: 6px;">${item.desc}</p>` : ''}
+                            </div>
+                            <div class="menu-item-image">
+                                <img src="${imageUrl}" alt="${item.name}">
+                            </div>
+                        </div>
+                    `;
+                    div.addEventListener('click', () => openProductModal(item));
+
+                    const quickAddBtn = div.querySelector('.quick-add-btn');
+                    quickAddBtn.addEventListener('click', (e) => {
+                        e.stopPropagation(); // no abrir el modal
+                        addToCart(item);
+                        quickAddBtn.classList.add('added');
+                        quickAddBtn.innerHTML = '<i class="fas fa-check"></i>';
+                        setTimeout(() => {
+                            quickAddBtn.classList.remove('added');
+                            quickAddBtn.innerHTML = '+';
+                        }, 900);
+                    });
+
+                    menuGrid.appendChild(div);
+                }
+            });
+            
+            document.querySelectorAll('.menu-item-list').forEach(item => {
+                scrollObserver.observe(item);
+            });
+        }
+
+        renderMenu();
+
+        // Calcula cuánto espacio fijo hay arriba (header sticky + barra de filtros sticky)
+        function getStickyOffset() {
+            const header = document.querySelector('header');
+            const filters = document.getElementById('menuFilters');
+            return header.offsetHeight + filters.offsetHeight;
+        }
+
+        // Lleva el scroll al inicio del listado de productos, debajo del header y los filtros
+        function scrollToMenuTop() {
+            const grid = document.getElementById('menuGrid');
+            const offset = getStickyOffset();
+            const targetY = grid.getBoundingClientRect().top + window.pageYOffset - offset;
+
+            window.scrollTo({
+                top: Math.max(targetY, 0),
+                behavior: 'smooth'
+            });
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderMenu(this.dataset.filter);
+                scrollToMenuTop();
+            });
+        });
+
+        document.querySelectorAll('.scroll-reveal').forEach(element => {
+            scrollObserver.observe(element);
+        });
+
+        // ============================================
+        // ESTADO "PEGADO" DEL MENÚ — via IntersectionObserver
+        // (evita el listener de scroll que causaba lag)
+        // ============================================
+        const menuFilters = document.getElementById('menuFilters');
+        const stickySentinel = document.getElementById('menuStickySentinel');
+        let stickyObserver = null;
+
+        function setupStickyObserver() {
+            if (stickyObserver) stickyObserver.disconnect();
+
+            const headerHeight = document.querySelector('header').offsetHeight;
+
+            stickyObserver = new IntersectionObserver(
+                ([entry]) => {
+                    menuFilters.classList.toggle('is-stuck', !entry.isIntersecting);
+                },
+                { rootMargin: `-${headerHeight + 1}px 0px 0px 0px`, threshold: 0 }
+            );
+            stickyObserver.observe(stickySentinel);
+        }
+
+        setupStickyObserver();
+        window.addEventListener('resize', setupStickyObserver);
+
+        // SMOOTH SCROLL
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // BOTÓN "VER MENÚ" DEL HERO
+        document.getElementById('verMenuBtn').addEventListener('click', () => {
+            const target = document.getElementById('menu');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // BOTÓN "PEDIR POR WHATSAPP" DEL HERO
+        document.querySelector('.hero .cta-secondary').addEventListener('click', () => {
+            const url = `https://wa.me/525563472545?text=${encodeURIComponent('¡Hola Pizzas El Che Boludo! 🍕 Quiero hacer un pedido')}`;
+            window.open(url, '_blank');
+        });
+
+        // ============================================
+        // CARRITO DE COMPRAS + PEDIDO POR WHATSAPP
+        // ============================================
+        const WHATSAPP_NUMBER = '525563472545'; // 52 (México) + 55 6347 2545
+
+        let cart = []; // [{ name, price, qty }] — registro momentáneo (no persiste al recargar)
+        let currentModalItem = null;
+
+        const productModalOverlay = document.getElementById('productModalOverlay');
+        const modalImage = document.getElementById('modalImage');
+        const modalName = document.getElementById('modalName');
+        const modalPrice = document.getElementById('modalPrice');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalAddBtn = document.getElementById('modalAddBtn');
+        const productModalClose = document.getElementById('productModalClose');
+
+        const cartBtn = document.getElementById('cartBtn');
+        const cartBadge = document.getElementById('cartBadge');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartClose = document.getElementById('cartClose');
+        const cartItemsEl = document.getElementById('cartItems');
+        const cartTotalEl = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+
+        function parsePrice(priceStr) {
+            return parseFloat(priceStr.replace('$', '').replace(',', '')) || 0;
+        }
+
+        function formatPrice(num) {
+            return '$' + num.toFixed(2);
+        }
+
+        // --- MODAL DE DETALLE DE PRODUCTO ---
+        function openProductModal(item) {
+            currentModalItem = item;
+            modalImage.src = getProductImage(item.name);
+            modalImage.alt = item.name;
+            modalName.textContent = item.name;
+            modalPrice.textContent = item.price;
+            modalDesc.textContent = item.desc || '';
+            modalAddBtn.classList.remove('added');
+            modalAddBtn.innerHTML = 'Agregar al <i class="fas fa-shopping-cart"></i>';
+            productModalOverlay.classList.add('active');
+        }
+
+        function closeProductModal() {
+            productModalOverlay.classList.remove('active');
+        }
+
+        productModalClose.addEventListener('click', closeProductModal);
+        productModalOverlay.addEventListener('click', (e) => {
+            if (e.target === productModalOverlay) closeProductModal();
+        });
+
+        modalAddBtn.addEventListener('click', () => {
+            if (!currentModalItem) return;
+            addToCart(currentModalItem);
+            modalAddBtn.classList.add('added');
+            modalAddBtn.innerHTML = '¡Agregado! <i class="fas fa-check"></i>';
+            setTimeout(closeProductModal, 550);
+        });
+
+        // --- LÓGICA DEL CARRITO ---
+        function addToCart(item) {
+            const existing = cart.find(c => c.name === item.name);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ name: item.name, price: item.price, qty: 1 });
+            }
+            updateCartBadge();
+        }
+
+        function removeOneFromCart(name) {
+            const existing = cart.find(c => c.name === name);
+            if (!existing) return;
+            existing.qty -= 1;
+            if (existing.qty <= 0) {
+                cart = cart.filter(c => c.name !== name);
+            }
+            updateCartBadge();
+            renderCart();
+        }
+
+        function addOneToCart(name) {
+            const existing = cart.find(c => c.name === name);
+            if (!existing) return;
+            existing.qty += 1;
+            updateCartBadge();
+            renderCart();
+        }
+
+        function getCartTotal() {
+            return cart.reduce((sum, c) => sum + parsePrice(c.price) * c.qty, 0);
+        }
+
+        function updateCartBadge() {
+            const totalItems = cart.reduce((sum, c) => sum + c.qty, 0);
+            cartBadge.textContent = totalItems;
+            cartBadge.classList.remove('bump');
+            void cartBadge.offsetWidth; // reinicia la animación
+            cartBadge.classList.add('bump');
+        }
+
+        function renderCart() {
+            if (cart.length === 0) {
+                cartItemsEl.innerHTML = '<div class="cart-empty">Tu carrito está vacío 🍕<br>Agrega algo delicioso del menú.</div>';
+                checkoutBtn.disabled = true;
+            } else {
+                cartItemsEl.innerHTML = cart.map(c => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${c.name}</div>
+                            <div class="cart-item-meta">${c.price}</div>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button class="cart-item-remove" data-name="${c.name.replace(/"/g, '&quot;')}" aria-label="Quitar una unidad">−</button>
+                            <span class="cart-item-qty-count">${c.qty}</span>
+                            <button class="cart-item-add" data-name="${c.name.replace(/"/g, '&quot;')}" aria-label="Agregar una unidad">+</button>
+                        </div>
+                    </div>
+                `).join('');
+                checkoutBtn.disabled = false;
+
+                cartItemsEl.querySelectorAll('.cart-item-remove').forEach(btn => {
+                    btn.addEventListener('click', () => removeOneFromCart(btn.dataset.name));
+                });
+                cartItemsEl.querySelectorAll('.cart-item-add').forEach(btn => {
+                    btn.addEventListener('click', () => addOneToCart(btn.dataset.name));
+                });
+            }
+            cartTotalEl.textContent = 'Total: ' + formatPrice(getCartTotal());
+        }
+
+        function openCart() {
+            renderCart();
+            cartOverlay.classList.add('active');
+        }
+
+        function closeCart() {
+            cartOverlay.classList.remove('active');
+        }
+
+        cartBtn.addEventListener('click', openCart);
+        cartClose.addEventListener('click', closeCart);
+        cartOverlay.addEventListener('click', (e) => {
+            if (e.target === cartOverlay) closeCart();
+        });
+
+        // --- ENVIAR PEDIDO POR WHATSAPP ---
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) return;
+
+            let message = '¡Hola Pizzas El Che Boludo! 🍕 Quiero hacer el siguiente pedido:\n\n';
+            cart.forEach(c => {
+                message += `• ${c.qty}x ${c.name} — ${c.price}\n`;
+            });
+            message += `\nTotal: ${formatPrice(getCartTotal())}`;
+
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        });
+    </script>
+</body>
+</html>
