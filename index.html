@@ -46,7 +46,14 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 8px 32px rgba(122, 62, 157, 0.4);
-            backdrop-filter: blur(10px);
+            transform: translateZ(0);
+            will-change: transform;
+            /* Sin backdrop-filter: el fondo ya es 100% opaco, así que el blur
+               no se alcanza a notar pero el navegador lo sigue calculando en
+               cada frame de scroll. Como el header queda pegado justo encima
+               del video del hero, ese cálculo de blur era lo que trababa el
+               video mientras se hacía scroll. Al quitarlo, el header se ve
+               exactamente igual pero deja de forzar ese recálculo costoso. */
         }
 
         .container {
@@ -196,6 +203,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            isolation: isolate;
+            contain: layout paint;
         }
 
         .hero-gif {
