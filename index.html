@@ -207,6 +207,10 @@
             object-fit: cover;
             z-index: 0;
             pointer-events: none;
+            background: var(--dark);
+            transform: translateZ(0);
+            will-change: transform;
+            backface-visibility: hidden;
         }
 
         .hero::before {
@@ -1513,13 +1517,20 @@
 
     <!-- HERO -->
     <section class="hero" id="inicio">
-        <img
+        <video
             class="hero-gif"
-            id="heroGif"
-            src="./gif.gif"
-            alt="Pizzas El Che Boludo"
-            loading="eager"
-        >
+            id="heroVideo"
+            src="./video.mp4"
+            poster="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&h=800&fit=crop"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            disablepictureinpicture
+            disableremoteplayback
+            aria-label="Pizzas El Che Boludo"
+        ></video>
         <div class="hero-content">
             <h1>Bienvenido a El Che Boludo</h1>
             <p>Las pizzas más boludamente deliciosas de la colonia</p>
@@ -1538,7 +1549,7 @@
             <div class="products-grid">
                 <div class="product-card scroll-reveal">
                     <div class="product-image">
-                        <img src="./2.png" alt="Especialidades" id="img-fresas">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=700&h=700&fit=crop" alt="Especialidades" id="img-fresas">
                         <div class="product-overlay">
                             <i class="fas fa-star overlay-icon"></i>
                         </div>
@@ -1551,7 +1562,7 @@
 
                 <div class="product-card scroll-reveal">
                     <div class="product-image">
-                        <img src="./4.png" alt="Promociones" id="img-crepas">
+                        <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=700&h=700&fit=crop" alt="Promociones" id="img-crepas">
                         <div class="product-overlay">
                             <i class="fas fa-fire overlay-icon"></i>
                         </div>
@@ -1564,7 +1575,7 @@
 
                 <div class="product-card scroll-reveal">
                     <div class="product-image">
-                        <img src="./5.png" alt="Pastor a la BBQ" id="img-smoothies">
+                        <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=700&h=700&fit=crop" alt="Pastor a la BBQ" id="img-smoothies">
                         <div class="product-overlay">
                             <i class="fas fa-pepper-hot overlay-icon"></i>
                         </div>
@@ -1586,32 +1597,32 @@
                 <div class="carousel-wrapper scroll-reveal">
                     <div class="carousel-inner" id="carouselInner">
                         <div class="carousel-item">
-                            <img src="./1.png" alt="Pizza Especial">
+                            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700&h=700&fit=crop" alt="Pizza Especial">
                             <div class="carousel-caption">
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="./2.png" alt="Pizza Pomposa">
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=700&h=700&fit=crop" alt="Pizza Pomposa">
                             <div class="carousel-caption">
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="./3.png" alt="Pizza Mexicana">
+                            <img src="https://images.unsplash.com/photo-1601924582970-9238bcb495d9?w=700&h=700&fit=crop" alt="Pizza Mexicana">
                             <div class="carousel-caption">
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="./4.png" alt="Pizza Magnum">
+                            <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=700&h=700&fit=crop" alt="Pizza Magnum">
                             <div class="carousel-caption">
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="./5.png" alt="Pastor a la BBQ">
+                            <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=700&h=700&fit=crop" alt="Pastor a la BBQ">
                             <div class="carousel-caption">
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="./1.png" alt="Pizza Hawaiana">
+                            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700&h=700&fit=crop" alt="Pizza Hawaiana">
                             <div class="carousel-caption">
                             </div>
                         </div>
@@ -1764,6 +1775,33 @@
         window.addEventListener('resize', setHeaderHeightVar);
         window.addEventListener('load', setHeaderHeightVar);
 
+        // ============================================
+        // VIDEO DE FONDO DEL HERO (optimizado)
+        // ============================================
+        // Se asegura que quede silenciado y se reproduzca sin trabas.
+        // Además se pausa cuando el usuario se desplaza fuera de la vista
+        // del hero para no consumir recursos de más mientras navega el resto
+        // de la página, y se reanuda automáticamente al volver a verse.
+        const heroVideo = document.getElementById('heroVideo');
+        if (heroVideo) {
+            heroVideo.muted = true;
+            heroVideo.playsInline = true;
+            heroVideo.play().catch(() => {});
+
+            if ('IntersectionObserver' in window) {
+                const heroVideoObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            heroVideo.play().catch(() => {});
+                        } else {
+                            heroVideo.pause();
+                        }
+                    });
+                }, { threshold: 0.1 });
+                heroVideoObserver.observe(heroVideo);
+            }
+        }
+
         // HAMBURGER MENU
         const hamburger = document.getElementById('hamburger');
         const nav = document.getElementById('nav');
@@ -1845,43 +1883,43 @@
         // raíz del sitio, junto al index.html. Cuando tengas fotos individuales
         // por sabor, solo cambia el valor correspondiente en el mapa de abajo
         // por el nombre de archivo que quieras usar.
-        const IMAGE_BASE_URL = './';
+        const IMAGE_BASE_URL = '';
         const productImageMap = {
-            'Promo 1 - Pepperoni y Hawaiana': '1.png',
-            'Promo 2 - Pepperoni y Hawaiana': '2.png',
-            'Promo 3 - Grandes con Orilla': '3.png',
-            'Promo 4 - Familiares con Orilla': '4.png',
-            'Martes y Miercoles - 2 Grandes': '5.png',
-            'Martes y Miercoles - 2 Familiares': '1.png',
+            'Promo 1 - Pepperoni y Hawaiana': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=500&fit=crop',
+            'Promo 2 - Pepperoni y Hawaiana': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=500&fit=crop',
+            'Promo 3 - Grandes con Orilla': 'https://images.unsplash.com/photo-1601924582970-9238bcb495d9?w=500&h=500&fit=crop',
+            'Promo 4 - Familiares con Orilla': 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=500&h=500&fit=crop',
+            'Martes y Miercoles - 2 Grandes': 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=500&h=500&fit=crop',
+            'Martes y Miercoles - 2 Familiares': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=500&fit=crop',
 
-            'Especial': '2.png',
-            'Pomposa': '3.png',
-            'Mexicana': '4.png',
-            'Magnum': '5.png',
-            'Ranchera': '1.png',
-            'Res Fria': '2.png',
-            'Alambre': '3.png',
-            'Nortenuzca': '4.png',
-            'Vegetariana': '5.png',
-            'La Pampa': '1.png',
-            'Cheroni': '2.png',
-            'Vaqueriana': '3.png',
-            'Pepperoni': '4.png',
-            'Hawaiana': '5.png',
-            'La Pastore': '1.png',
-            'Pastor a la BBQ': '2.png',
+            'Especial': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=500&fit=crop',
+            'Pomposa': 'https://images.unsplash.com/photo-1601924582970-9238bcb495d9?w=500&h=500&fit=crop',
+            'Mexicana': 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=500&h=500&fit=crop',
+            'Magnum': 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=500&h=500&fit=crop',
+            'Ranchera': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=500&fit=crop',
+            'Res Fria': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=500&fit=crop',
+            'Alambre': 'https://images.unsplash.com/photo-1601924582970-9238bcb495d9?w=500&h=500&fit=crop',
+            'Nortenuzca': 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=500&h=500&fit=crop',
+            'Vegetariana': 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=500&h=500&fit=crop',
+            'La Pampa': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=500&fit=crop',
+            'Cheroni': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=500&fit=crop',
+            'Vaqueriana': 'https://images.unsplash.com/photo-1601924582970-9238bcb495d9?w=500&h=500&fit=crop',
+            'Pepperoni': 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=500&h=500&fit=crop',
+            'Hawaiana': 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=500&h=500&fit=crop',
+            'La Pastore': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=500&fit=crop',
+            'Pastor a la BBQ': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=500&fit=crop',
 
-            'Orilla de Queso Chica': '3.png',
-            'Orilla de Queso Mediana': '4.png',
-            'Orilla de Queso Grande': '5.png',
-            'Orilla de Queso Familiar': '1.png',
-            'Pizza Mitad y Mitad': '2.png',
+            'Orilla de Queso Chica': 'https://images.unsplash.com/photo-1601924582970-9238bcb495d9?w=500&h=500&fit=crop',
+            'Orilla de Queso Mediana': 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=500&h=500&fit=crop',
+            'Orilla de Queso Grande': 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=500&h=500&fit=crop',
+            'Orilla de Queso Familiar': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=500&fit=crop',
+            'Pizza Mitad y Mitad': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=500&fit=crop',
 
-            'Combo 2 Medianas': '3.png',
-            'Combo 3 Medianas': '4.png',
+            'Combo 2 Medianas': 'https://images.unsplash.com/photo-1601924582970-9238bcb495d9?w=500&h=500&fit=crop',
+            'Combo 3 Medianas': 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=500&h=500&fit=crop',
 
-            'Refresco 1.5 L': '5.png',
-            'Refresco de Vidrio': '1.png'
+            'Refresco 1.5 L': 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=500&h=500&fit=crop',
+            'Refresco de Vidrio': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=500&fit=crop'
         };
 
         function getProductImage(productName) {
